@@ -7,7 +7,7 @@
 	let { inMemoryState }: { inMemoryState: UserSettings } = $props();
 </script>
 
-<Card>
+<Card grow>
 	<div class="header">
 		<h2>In-Memory State</h2>
 		<Pill theme="accent">live</Pill>
@@ -16,15 +16,13 @@
 		Direct read of the <code>$state</code> proxy on
 		<code>Stash.state</code>. Updates on every change.
 	</p>
-	<CodeBox>{JSON.stringify(inMemoryState, null, 2)}</CodeBox>
+	<CodeBox grow>{JSON.stringify(inMemoryState, null, 2)}</CodeBox>
 </Card>
 
 <style>
 	.header {
 		display: flex;
 		align-items: center;
-		gap: var(--space-sm);
-
-		margin-bottom: var(--space-xs);
+		gap: var(--space-s);
 	}
 </style>

@@ -7,7 +7,7 @@
 	let { persistedState }: { persistedState: UserSettings } = $props();
 </script>
 
-<Card>
+<Card grow>
 	<div class="header">
 		<h2>Persisted State</h2>
 		<Pill theme="success">localStorage</Pill>
@@ -16,15 +16,13 @@
 		Written by <code>saveCallback</code> after the debounce settles. Lags behind in-memory state by up
 		to 500ms.
 	</p>
-	<CodeBox>{JSON.stringify(persistedState, null, 2)}</CodeBox>
+	<CodeBox grow>{JSON.stringify(persistedState, null, 2)}</CodeBox>
 </Card>
 
 <style>
 	.header {
 		display: flex;
 		align-items: center;
-		gap: var(--space-sm);
-
-		margin-bottom: var(--space-xs);
+		gap: var(--space-s);
 	}
 </style>

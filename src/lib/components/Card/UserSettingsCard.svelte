@@ -72,23 +72,27 @@
 
 <style>
 	h2 {
-		margin-bottom: var(--space-sm);
+		margin-bottom: var(--space-xs);
 	}
 
 	.field {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-sm);
+		gap: var(--space-s);
 
 		margin-bottom: var(--space-xl);
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
 
 		.label {
 			display: flex;
 			align-items: center;
-			gap: var(--space-sm);
+			gap: var(--space-s);
 
 			color: var(--text-secondary);
-			font-size: var(--text-sm);
+			font-size: var(--text-s);
 			font-weight: var(--font-medium);
 
 			.swatch {
@@ -103,9 +107,9 @@
 			}
 
 			.hue-chip {
-				border-radius: var(--radius-sm);
+				border-radius: var(--radius-s);
 				background: var(--accent-alpha);
-				padding: 0.1em var(--space-sm);
+				padding: 0.1em var(--space-s);
 				color: var(--accent);
 				font-family: var(--font-mono);
 				font-size: var(--text-xs);
@@ -116,8 +120,8 @@
 			display: flex;
 			gap: var(--space-xs);
 
-			border: var(--border-width) solid var(--border-default);
-			border-radius: var(--radius-md);
+			border: var(--border-width) solid var(--border-interactive);
+			border-radius: var(--radius-m);
 			background: var(--surface-1);
 			padding: var(--space-xs);
 
@@ -126,32 +130,41 @@
 
 				cursor: pointer;
 				border: none;
-				border-radius: var(--radius-sm);
+				border-radius: var(--radius-s);
 				background: transparent;
-				padding: var(--space-sm) var(--space-lg);
+				padding: var(--space-s) var(--space-l);
 				color: var(--text-secondary);
 				font-family: var(--font-sans);
-				font-size: var(--text-sm);
+				font-size: var(--text-s);
 				font-weight: var(--font-medium);
 				transition: var(--transition-colors);
 
+				&:hover:not(.active) {
+					background: var(--accent-alpha);
+					color: var(--accent);
+				}
+
 				&.active {
 					background: var(--accent);
-					color: var(--surface-1);
+					color: var(--accent-foreground);
 				}
 			}
 		}
 
 		.select {
 			cursor: pointer;
-			border: var(--border-width) solid var(--border-default);
-			border-radius: var(--radius-md);
+			border: var(--border-width) solid var(--border-interactive);
+			border-radius: var(--radius-m);
 			background: var(--surface-1);
-			padding: var(--space-sm) var(--space-md);
+			padding: var(--space-s) var(--space-m);
 			color: var(--text-primary);
 			font-family: var(--font-sans);
 			font-size: var(--text-base);
 			transition: var(--transition-colors);
+
+			&:hover {
+				border-color: var(--accent);
+			}
 
 			&:focus {
 				outline: var(--focus-ring);
@@ -162,7 +175,7 @@
 		.switch {
 			display: inline-flex;
 			align-items: center;
-			gap: var(--space-md);
+			gap: var(--space-m);
 
 			cursor: pointer;
 			user-select: none;
@@ -180,7 +193,7 @@
 				width: 2.75rem;
 				height: 1.5rem;
 				position: relative;
-				border: var(--border-width) solid var(--border-default);
+				border: var(--border-width) solid var(--border-interactive);
 				border-radius: var(--radius-full);
 				background: var(--surface-4);
 				transition: var(--transition-colors);
@@ -204,21 +217,68 @@
 
 				.thumb {
 					left: calc(100% - 1.3rem);
-					background: var(--surface-1);
+					background: var(--accent-foreground);
 				}
 			}
 
 			.switch-label {
 				min-width: 4.5rem;
 				color: var(--text-secondary);
-				font-size: var(--text-sm);
+				font-size: var(--text-s);
 			}
 		}
 
 		.range {
 			cursor: pointer;
 			width: 100%;
+			height: 1.25rem;
+			background: transparent;
+			appearance: none;
 			accent-color: var(--accent);
+
+			&::-webkit-slider-runnable-track {
+				height: 0.375rem;
+				border-radius: var(--radius-full);
+				background: var(--surface-4);
+			}
+
+			&::-webkit-slider-thumb {
+				appearance: none;
+				width: 1.25rem;
+				height: 1.25rem;
+				margin-top: -0.4375rem;
+				border: 0.125rem solid var(--accent);
+				border-radius: var(--radius-full);
+				background: var(--surface-1);
+				box-shadow: var(--shadow-s);
+				transition:
+					transform var(--duration-fast) var(--ease-out),
+					box-shadow var(--duration-fast) var(--ease-out);
+
+				&:hover {
+					transform: scale(1.1);
+				}
+			}
+
+			&::-moz-range-track {
+				height: 0.375rem;
+				border-radius: var(--radius-full);
+				background: var(--surface-4);
+			}
+
+			&::-moz-range-thumb {
+				width: 1.25rem;
+				height: 1.25rem;
+				border: 0.125rem solid var(--accent);
+				border-radius: var(--radius-full);
+				background: var(--surface-1);
+				box-shadow: var(--shadow-s);
+			}
+
+			&:focus-visible {
+				outline: var(--focus-ring);
+				outline-offset: var(--focus-ring-offset);
+			}
 		}
 
 		.hue-strip {
@@ -241,9 +301,11 @@
 	.actions {
 		display: flex;
 		align-items: center;
-		gap: var(--space-sm);
+		gap: var(--space-s);
 
-		padding-top: var(--space-lg);
+		margin-top: auto;
+		padding-top: var(--space-l);
+		border-top: var(--border-width) solid var(--border-subtle);
 
 		.status {
 			margin-left: auto;

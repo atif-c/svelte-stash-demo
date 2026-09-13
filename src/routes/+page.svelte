@@ -6,7 +6,6 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import { defaultUserSettings, type UserSettings } from '$lib/UserSettings';
-	import '@atifc/css';
 	import { onDestroy, onMount } from 'svelte';
 	import { Stash } from 'svelte-stash';
 
@@ -79,10 +78,12 @@
 
 		<Footer {localStorageKey} />
 	{:else}
-		<CodeBox>{JSON.stringify(settings.state)}</CodeBox>
-		<CodeBox>{JSON.stringify(inMemoryState)}</CodeBox>
-		<CodeBox>{JSON.stringify(persistedState)}</CodeBox>
-		<div class="loading">Loading state&hellip;</div>
+		<div class="loading-state">
+			<CodeBox>{JSON.stringify(settings.state)}</CodeBox>
+			<CodeBox>{JSON.stringify(inMemoryState)}</CodeBox>
+			<CodeBox>{JSON.stringify(persistedState)}</CodeBox>
+			<div class="loading">Loading state&hellip;</div>
+		</div>
 	{/if}
 </div>
 
@@ -94,17 +95,17 @@
 		}
 
 		h2 {
-			font-size: var(--text-lg);
+			font-size: var(--text-l);
 			font-weight: var(--font-semibold);
 		}
 		p {
 			color: var(--text-secondary);
-			font-size: var(--text-sm);
+			font-size: var(--text-s);
 
 			line-height: var(--leading-relaxed);
 		}
 		code {
-			border-radius: var(--radius-sm);
+			border-radius: var(--radius-s);
 			background: var(--accent-alpha);
 			font-family: var(--font-mono);
 			font-size: 0.9em;
@@ -113,21 +114,28 @@
 		}
 	}
 	.page {
+		display: flex;
+		flex-direction: column;
 		min-height: 100vh;
 		background: var(--surface-1);
 		color: var(--text-primary);
 		font-family: var(--font-sans);
 		font-size: var(--text-base);
 		line-height: var(--leading-normal);
+		transition:
+			background-color var(--duration-slow) var(--ease-out),
+			color var(--duration-slow) var(--ease-out);
 	}
 	main {
-		max-width: var(--container-lg);
+		flex: 1;
+		width: 100%;
+		max-width: var(--container-l);
 		margin-inline: auto;
 		padding: var(--space-3xl) var(--space-xl);
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 		gap: var(--space-xl);
-		align-items: start;
+		align-items: stretch;
 		.right-panel {
 			display: flex;
 			flex-direction: column;
@@ -138,13 +146,24 @@
 	@media (max-width: 780px) {
 		main {
 			grid-template-columns: 1fr;
+			padding: var(--space-2xl) var(--space-l);
 		}
 	}
 
-	.loading {
-		text-align: center;
-		padding: var(--space-4xl);
-		color: var(--text-tertiary);
-		font-size: var(--text-sm);
+	.loading-state {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-s);
+		width: 100%;
+		max-width: var(--container-fluid-s);
+		margin-inline: auto;
+		padding: var(--space-2xl) var(--space-l);
+
+		.loading {
+			text-align: center;
+			padding: var(--space-l);
+			color: var(--text-tertiary);
+			font-size: var(--text-s);
+		}
 	}
 </style>

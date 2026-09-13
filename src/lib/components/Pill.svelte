@@ -8,16 +8,17 @@
 		$props();
 </script>
 
-<span class={theme}> {@render children?.()} </span>
+<span class={theme}>{@render children?.()}</span>
 
 <style>
 	span {
 		border: var(--border-width) solid;
 		border-radius: var(--radius-full);
-		padding: 0.15em var(--space-sm);
+		padding: 0.15em var(--space-s);
 		font-family: var(--font-mono);
 		font-size: var(--text-xs);
 		font-weight: var(--font-medium);
+		white-space: nowrap;
 
 		&.accent {
 			border-color: var(--accent-muted);

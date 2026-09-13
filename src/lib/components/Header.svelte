@@ -28,22 +28,29 @@
 		.inner {
 			display: flex;
 			flex-direction: column;
-			gap: var(--space-sm);
+			align-items: flex-start;
+			gap: var(--space-s);
 
-			max-width: var(--container-lg);
+			max-width: var(--container-l);
 			margin: 0 auto;
 
 			p {
 				max-width: 60ch;
-				font-size: var(--text-md);
+				font-size: var(--text-m);
 				color: var(--text-secondary);
 			}
 
 			.badges {
 				display: flex;
-				gap: var(--space-xs);
-				margin-bottom: var(--space-xs);
+				gap: var(--space-s);
+				margin-top: var(--space-s);
 			}
+		}
+	}
+
+	@media (max-width: 780px) {
+		header {
+			padding: var(--space-xl) var(--space-l);
 		}
 	}
 </style>
