@@ -1,7 +1,7 @@
 <script lang="ts">
-	let { children } = $props();
-
 	import pkg from '../../package.json';
+
+	let { children } = $props();
 </script>
 
 <svelte:head>
